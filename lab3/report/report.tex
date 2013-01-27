@@ -1,0 +1,113 @@
+\documentclass[12pt,a4paper,oneside]{report}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage[left=2cm,right=1.5cm, top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
+
+\title{Лабораторная работа №3\\по курсу\\Методы вычислений \\<<Безусловная минимизация функций двух перемен-ных. Методы, использующие производные.>>}
+\author{Фроловский Алексей Вадимович}
+\date{группа ИУ7-17 \\ Вариант № 14\\23 ноября 2012 года}
+
+\begin{document}
+\maketitle
+\section*{Цель работы}
+Написать программы нахождения минимума, реализующие:
+\begin{enumerate}
+\item Метод сопряженных градиентов;
+\item Метод Ньютона с конечно-разностной аппроксимацией производных;
+\item Метод Девидона–Флетчера–Пауэла (ДФП).
+\end{enumerate}
+
+Найти точку минимума квадратичной функции
+\begin{equation}
+\label{f1}
+z = 4x_{1}x_{2}+7x^{2}_{1}+4x^{2}_{2}+6\sqrt{5}x_{1}-12\sqrt{5}x_{2}+51
+\end{equation}
+с использованием указанных выше методов, а также используя возможности Optimization Toolbox Matlab. В качестве стартовой взять точку~$(0;-\sqrt{5})$. 
+
+Для функции 
+\begin{equation}
+\label{f2}
+z = x^{3}_{2}+2x_{2}x_{1} + \frac{1}{\sqrt{x_{1}x_{2}}} + x_{1}
+\end{equation}
+с помощью созданнх программ найти локальный минимум, ближайший к стартовой точке~$(3, 3)$.
+
+Критерий окончания выбрать так, чтобы координаты вычисленного приближения к
+точке минимума функции содержали три верные значащие цифры.
+
+\section*{Ход работы}
+Найдем минимум функции~(\ref{f1}) теоритическим способом. Cocтавим и решим систему уравнений (\ref{eqsys})
+\begin{equation}
+\label{eqsys}
+\left\{  
+ 	\begin{array}{rcl}  
+           \dfrac{\partial{f}}{\partial{x_{1}}} & = & 0 \\  
+           \dfrac{\partial{f}}{\partial{x_{2}}} & = & 0 \\  
+           \end{array}   
+ \right.
+\end{equation}
+или
+\begin{equation}
+\label{eqsysext}
+\left\{  
+ 	\begin{array}{rcl}  
+           4x_{2} + 14x_{1} + 6\sqrt{5} & = & 0 \\  
+           4x_{1} + 8x_{2} - 12\sqrt{5} & = & 0 \\  
+           \end{array}   
+ \right.
+\end{equation}
+Получим $x_{1} = -\sqrt{5}, x_{2} = 2\sqrt{5}$. Подставим полученные значения  в (\ref{f1}):
+\begin{equation}
+f(-\sqrt{5},2\sqrt{5}) = -24
+\end{equation}
+Таким образом, минимальное значение функции -24 достигается в точке (-2.2362,  4.4719).
+
+Покажем. что функция ~(\ref{f1}) является выпуклой.
+
+\begin{equation}
+f^{\prime\prime}_{xx} =  \left( \begin{array}{cc}
+	14 & 4 \\
+ 	  4 & 8 \end{array} \right)
+\end{equation}
+
+Как можно увидеть данная матрица является положительно определенной и, следовательно, функция ~(\ref{f1}) является выпуклой.
+
+
+Доопределим функцию~(\ref{f2}) так, чтобы обеспечить нахождение требуемого локального минимума. Для этого наложим на область определения ограничения $x_{1}>0, x_{2}>0$
+\section*{Результаты}
+ Сравнение работы методов для квадратичной функции (\ref{f1})
+\begin{center}
+\begin{tabular}{||c|c|c|c||}
+\hline
+Метод		&	$x^{*}$	&	$f(x^{*})$  &	количество вычислений функции \\
+\hline
+\input{standart_mthd_f1.tex} 
+\hline
+\input{conj_grad_mthd_f1.tex} 
+\hline
+\input{newton_mthd_f1.tex} 
+\hline
+\input{dfp_mthd_f1.tex} 
+\hline 		
+\end{tabular}
+\end{center}
+
+Для функции~(\ref{f2})
+\begin{center}
+\begin{tabular}{||c|c|c|c||}
+\hline
+Метод		&	$x^{*}$	&	$f(x^{*})$  &	количество вычислений функции \\
+\hline
+\input{standart_mthd_f2.tex} 
+\hline
+\input{conj_grad_mthd_f2.tex} 
+\hline
+\input{newton_mthd_f2.tex} 
+\hline
+\input{dfp_mthd_f2.tex} 
+\hline 		
+\end{tabular}
+\end{center} 
+
+Лучшие результаты как по точности, так и по трудоемкости, показывает метод ДФП. Метод сопряженных градиентов показал значительно худшие результаты для обеих функций. С точки зрения точности поиска все три метода показали приблизительно одинаковые значения.
+\end{document}

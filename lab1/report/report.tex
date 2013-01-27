@@ -1,0 +1,43 @@
+\documentclass[a4paper,12pt]{report}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[russian,english]{babel} 
+\usepackage[T2A]{fontenc}
+
+\usepackage{mathtext}
+\usepackage{tabularx}
+\usepackage{array}
+
+%\usepackage{ucs}
+\usepackage{geometry}
+\geometry{left=2cm}
+\geometry{right=1.5cm}
+\geometry{top=1cm}
+\geometry{bottom=2cm}
+
+\author{Фроловский Алексей \\ ИУ7-17}
+\title{Лабораторные работы №1-4 \\ по курсу методы вычислений \\ на тему: \\  
+<< Поиск минимума функции одной переменной >> }
+\date{30 сентября 2012г.}
+
+\begin{document}
+
+\maketitle
+Исследуемая функция: \\
+\begin{math}
+y=\cos{(\frac{2x^3 - 3x + 3 + 3\sqrt{10}}{3})}+\arcsin{(\frac{x^3 + 2x + 1}{3x + 1})} - 0.5,
+\end{math}
+где
+\begin{math}
+ x\in[0, 1]
+\end{math}
+
+\begin{center}
+\input{tables.tex}    
+\end{center}
+
+\end{document}
+
+
+
+

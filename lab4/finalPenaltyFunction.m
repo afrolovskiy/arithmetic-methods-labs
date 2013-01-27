@@ -1,0 +1,6 @@
+function [value] = finalPenaltyFunction(Ak, x)
+    value = Ak * (penaltyFunction(@g1, 1, x)^2 + ...
+                  penaltyFunction(@g2, 10, x)^2 + ...
+                  penaltyFunction(@g3, 1, x)^2);
+end
+
